@@ -1,6 +1,6 @@
 workflow "New workflow" {
   on = "push"
-  resolves = ["blackducksoftware/github-action@1.0.1"]
+  resolves = ["new-action"]
 }
 
 action "GitHub Action for Maven" {
@@ -13,4 +13,9 @@ action "blackducksoftware/github-action@1.0.1" {
   needs = ["GitHub Action for Maven"]
   secrets = ["BLACKDUCK_URL", "BLACKDUCK_API_TOKEN"]
   args = "--blackduck.url=${{ secrets.BLACKDUCK_URL}} --blackduck.api.token=${{ secrets.BLACKDUCK_API_TOKEN }}"
+}
+
+action "new-action" {
+  uses = "owner/repo/path@ref"
+  needs = ["blackducksoftware/github-action@1.0.1"]
 }
